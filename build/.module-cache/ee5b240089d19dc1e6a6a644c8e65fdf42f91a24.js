@@ -24,10 +24,8 @@ var Center = React.createClass({displayName: 'Center',
     var info = this.refs.info.getDOMNode();
     console.log(info);
     TweenLite.from(info, 2, {color:'darkseagreen'});
-     TweenLite.from(info, 2, {delay:3,color:'darkseagreen'});
-
     TweenLite.to(info, 2, {text:{value:"Scroll With Mouse", delimiter:"", color: 'darkseagreen'}, ease:Linear.easeNone});
-    TweenLite.to(info, 2, {delay:3, text:{value:"Type the Names to Change the Spin", delimiter:" "}, ease:Linear.easeNone});
+    TweenLite.to(info, 2, {delay:4, text:{value:"Type the Names to Change the Spin", delimiter:" "}, ease:Linear.easeNone});
   },
  
   animate: function() {
@@ -58,8 +56,7 @@ var Center = React.createClass({displayName: 'Center',
     t1.push(Math.floor(event.deltaY));
   },
   handleClick: function(event) {
-    if(tween != null)
-      tween.kill();
+    tween.kill();
   },
   handleInput: function(event) {
     var cir = /Circle/;

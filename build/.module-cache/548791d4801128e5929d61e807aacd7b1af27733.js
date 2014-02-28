@@ -58,8 +58,7 @@ var Center = React.createClass({displayName: 'Center',
     t1.push(Math.floor(event.deltaY));
   },
   handleClick: function(event) {
-    if(tween != null)
-      tween.kill();
+    tween.kill();
   },
   handleInput: function(event) {
     var cir = /Circle/;
