@@ -7,7 +7,7 @@ var tween;
 var garbo;
 var count = 0;
 var rotationSnap = Math.PI / 4;
-var Center = React.createClass({
+var Center = React.createClass({displayName: 'Center',
 
   getInitialState: function() {
     return {text: 'Mandala', 
@@ -21,16 +21,6 @@ var Center = React.createClass({
  
   componentDidMount: function() {
     eagle = this.refs.myInput.getDOMNode();
-<<<<<<< HEAD
-=======
-    var info = this.refs.info.getDOMNode();
-    console.log(info);
-    TweenLite.from(info, 2, {color:'darkseagreen'});
-     TweenLite.from(info, 2, {delay:3,color:'darkseagreen'});
-
-    TweenLite.to(info, 2, {text:{value:"Scroll With Mouse", delimiter:"", color: 'darkseagreen'}, ease:Linear.easeNone});
-    TweenLite.to(info, 2, {delay:3, text:{value:"Type the Names to Change the Spin", delimiter:" "}, ease:Linear.easeNone});
->>>>>>> master
   },
  
   animate: function() {
@@ -61,12 +51,7 @@ var Center = React.createClass({
     t1.push(Math.floor(event.deltaY));
   },
   handleClick: function(event) {
-<<<<<<< HEAD
     tween.kill();
-=======
-    if(tween != null)
-      tween.kill();
->>>>>>> master
   },
   handleInput: function(event) {
     var cir = /Circle/;
@@ -102,23 +87,20 @@ var Center = React.createClass({
     //var reverse = value.toLowerCase().split('').reverse().join('');
   
     return (
-      <div className="container" onClick={this.handleClick} onWheel={this.handleScroll} >
-<<<<<<< HEAD
-=======
-        <span ref='info'></span>
->>>>>>> master
-        <h1><input ref="Input" type="text" value={text} onChange={this.handleInput} /></h1>
-        <Left side={text} type="Darkness" />
-        <span className={circle} >Circle</span>
-        <span className={vertical} >Vertical</span>
-        <span className={mandala} >Mandala</span>
-        <Progress side={value} />
-        <Box place={value} ref="myInput" />
-      </div>
+      React.DOM.div( {className:"container", onClick:this.handleClick, onWheel:this.handleScroll} , 
+        React.DOM.span( {ref:"info"}),
+        React.DOM.h1(null, React.DOM.input( {ref:"Input", type:"text", value:text, onChange:this.handleInput} )),
+        Left( {side:text, type:"Darkness"} ),
+        React.DOM.span( {className:circle} , "Circle"),
+        React.DOM.span( {className:vertical} , "Vertical"),
+        React.DOM.span( {className:mandala} , "Mandala"),
+        Progress( {side:value} ),
+        Box( {place:value, ref:"myInput"} )
+      )
     );
   }
 });
-var Box = React.createClass({
+var Box = React.createClass({displayName: 'Box',
   getInitialState: function() {
     return {size: {width: '20%', height: '20%'}}
   },
@@ -153,26 +135,26 @@ var Box = React.createClass({
     var style = {width: "200px", height: "200px"};
     var size = this.state.size;
     return(
-      <div  style={style} className="box">
-        <div ref="potato" onClick={this.handleClick} style={size} className="blue">{this.props.place}</div>
-        </div>
+      React.DOM.div(  {style:style, className:"box"}, 
+        React.DOM.div( {ref:"potato", onClick:this.handleClick, style:size, className:"blue"}, this.props.place)
+        )
         );
     }
   
 });
 
-var Left = React.createClass({
+var Left = React.createClass({displayName: 'Left',
   render: function() {
     return (
-      <span className="left">I am {this.props.side}. </span>
+      React.DOM.span( {className:"left"}, "I am ", this.props.side,". " )
     );
   }
 });
 
-var Progress = React.createClass({
+var Progress = React.createClass({displayName: 'Progress',
   render: function() {
     return (
-      <span className="right">Progress: {this.props.side}.</span>
+      React.DOM.span( {className:"right"}, "Progress: ", this.props.side,".")
     );
   }
 });
@@ -181,7 +163,7 @@ var Progress = React.createClass({
 var obj = ({gender: 0});
 
 var avatar = React.renderComponent(
-  <Center profile={obj} />,
+  Center( {profile:obj} ),
   document.body
 );
 
@@ -190,14 +172,14 @@ var avatar = React.renderComponent(
 
 
 
-var Triangle = React.createClass({
+var Triangle = React.createClass({displayName: 'Triangle',
   render:function() {
     return (
-      <div>
-      <svg className="svg">
-        <path d={"M150 0 L"+this.props.top+"L225 200 Z"} stroke="black" strokeWidth="1" fill={this.props.color} />
-      </svg>
-      </div>
+      React.DOM.div(null, 
+      React.DOM.svg( {className:"svg"}, 
+        React.DOM.path( {d:"M150 0 L"+this.props.top+"L225 200 Z", stroke:"black", strokeWidth:"1", fill:this.props.color} )
+      )
+      )
     );
   }
 })
